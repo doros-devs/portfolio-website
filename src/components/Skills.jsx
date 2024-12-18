@@ -26,7 +26,10 @@ const Skills = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section
+      id="skills"
+      className="py-20 px-4 bg-white"
+    >
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-[80px] mb-16 text-[#E2FF7D]">
           MY SKILLS
@@ -116,12 +119,12 @@ const Skills = () => {
         </div>
 
         {/* Additional Skills Section */}
-        <div className="rounded-2xl border-[1px] border-black mt-12">
+        <div className="rounded-2xl border-[1px] border-black mt-12 ">
           <h3 className="text-center text-[40px]  text-[#E2FF7D] mt-12">
             ADDITIONAL SKILLS
           </h3>
           <div className="flex justify-center items-center">
-            <div className="flex-1 grid grid-cols-6">
+            <div className="flex-1 grid grid-cols-6 bg-grid-small-black/[0.2]">
               <div className="aspect-square bg-white rounded-2xl p-4 flex items-center justify-center">
                 <img
                   src={typescriptLogo}

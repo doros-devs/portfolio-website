@@ -3,7 +3,10 @@ import backgroundImage from "../images/Subject3.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-white">
+    <section
+      id="hero"
+      className="relative h-screen w-full overflow-hidden bg-white bg-grid-small-black/[0.2]"
+    >
       {/* Background text content */}
       <div className="absolute h-full w-full flex flex-col items-center justify-start pt-20 px-4">
         <div className="text-center">

@@ -1,22 +1,23 @@
-
-
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center p-4 bg-white shadow-lg">
-      <h1 className="text-2xl font-bold">Terence Ouma</h1>
-      <div className="space-x-6">
-        <a href="#services" className="text-gray-800 hover:text-red-500">
-          Services
-        </a>
-        <a href="#works" className="text-gray-800 hover:text-red-500">
-          Works
-        </a>
-        <a href="#notes" className="text-gray-800 hover:text-red-500">
-          Notes
-        </a>
-        <a href="#experience" className="text-gray-800 hover:text-red-500">
-          Experience
-        </a>
+    <nav className="flex justify-between items-center bg-transparent fixed w-full top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
+        <img
+          src="/src/images/TERENCE-LOGO.png"
+          alt="Terence Ouma Logo"
+          className="h-12 w-auto"
+        />
+        <div className="space-x-6">
+          <a href="#hero" className="text-gray-800 hover:text-[#E2FF7D]">
+            Home
+          </a>
+          <a href="#skills" className="text-gray-800 hover:text-[#E2FF7D]">
+            Skills
+          </a>
+          <a href="#projects" className="text-gray-800 hover:text-[#E2FF7D]">
+            Projects
+          </a>
+        </div>
       </div>
     </nav>
   );

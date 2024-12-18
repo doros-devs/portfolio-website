@@ -34,10 +34,15 @@ const Projects = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section
+      id="projects"
+      className="pb-20 px-4 bg-white bg-grid-small-black/[0.2]"
+    >
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-[80px] mb-16 text-black">MY PROJECTS</h2>
-        
+        <h2 className="text-center text-[80px] mb-16 text-black">
+          MY PROJECTS
+        </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <a
@@ -52,7 +57,7 @@ const Projects = () => {
                 alt={`Project ${project.id}`}
                 className="w-full h-full object-contain"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-black bg-opacity-0 hover:border-2 hover:border-black transition-opacity duration-300" />
             </a>
           ))}
         </div>
@@ -61,4 +66,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;
