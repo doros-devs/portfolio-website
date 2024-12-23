@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { HiMenu } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
+import logo from "../images/TERENCE-LOGO.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ const Navbar = () => {
     <nav className="flex justify-between items-center bg-white w-full top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 w-full flex justify-between items-center h-16">
         <img
-          src="/src/images/TERENCE-LOGO.png"
+          src={logo}
           alt="Terence Ouma Logo"
           className="h-12 w-auto"
         />
