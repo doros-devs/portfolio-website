@@ -39,7 +39,7 @@ const Projects = () => {
       className="pb-20 px-4 bg-white bg-grid-small-black/[0.2]"
     >
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-[80px] mb-16 text-black">
+        <h2 className="text-center text-[40px] sm:text-[60px] lg:text-[80px] mb-8 md:mb-16 text-[#E2FF7D]">
           MY PROJECTS
         </h2>
 
