@@ -54,6 +54,9 @@ const HeroSection = () => {
                 <img
                   src={backgroundImage}
                   alt="Profile"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="sync"
                   className="w-full h-full object-contain object-center md:object-contain lg:object-contain"
                 />
               </div>
