@@ -22,7 +22,7 @@ const HeroSection = () => {
             <p className="text-xl sm:text-2xl mb-4 text-gray-800">👋, my name is Terence</p>
             <div className="flex flex-col items-center">
               <h2 className="text-[40px] sm:text-[60px] md:text-[50px] lg:text-[80px] text-black">I am</h2>
-              <div className="text-[50px] sm:text-[80px] md:text-[60px] lg:text-[120px] font-bold text-black min-h-[1.2em]">
+              <div className="text-[40px] sm:text-[80px] md:text-[60px] lg:text-[120px] font-bold text-black min-h-[1.2em]">
                 {isClient && (
                   <ReactTyped
                     strings={["Software Engineer", "Product Manager"]}
