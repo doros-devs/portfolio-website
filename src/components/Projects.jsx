@@ -1,8 +1,99 @@
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import PropTypes from 'prop-types';
 import dorosImage from "../images/doros.png";
 import patisserieImage from "../images/lapatesseriedejoie.png";
 import petpalImage from "../images/petpal.png";
 import afriTrimImage from "../images/afri-trim.png";
 import inventaImage from "../images/inventa.png";
+
+const ProjectCard = ({ project }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, {
+    stiffness: 150,
+    damping: 15,
+    mass: 0.1
+  });
+
+  const mouseYSpring = useSpring(y, {
+    stiffness: 150,
+    damping: 15,
+    mass: 0.1
+  });
+
+  const rotateX = useTransform(
+    mouseYSpring,
+    [-0.5, 0.5],
+    ["25deg", "-25deg"]
+  );
+
+  const rotateY = useTransform(
+    mouseXSpring,
+    [-0.5, 0.5],
+    ["-25deg", "25deg"]
+  );
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <div className="relative perspective">
+      <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        className="w-full relative preserve-3d"
+      >
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full aspect-[16/9] rounded-xl bg-white shadow-lg overflow-hidden preserve-3d"
+        >
+          <motion.div
+            style={{
+              transform: "translateZ(75px)",
+            }}
+            className="w-full h-full preserve-3d"
+          >
+            <img
+              src={project.image}
+              alt={`Project ${project.id}`}
+              className="w-full h-full object-cover backface-hidden"
+            />
+          </motion.div>
+        </a>
+      </motion.div>
+    </div>
+  );
+};
+
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 const Projects = () => {
   const projects = [
@@ -45,20 +136,7 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <a
-              key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative aspect-[16/9] rounded-3xl overflow-hidden transform transition-transform duration-300 hover:scale-105 bg-white p-4"
-            >
-              <img
-                src={project.image}
-                alt={`Project ${project.id}`}
-                className="w-full h-full object-contain"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-0 hover:border-2 hover:border-black transition-opacity duration-300" />
-            </a>
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>
