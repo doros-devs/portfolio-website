@@ -9,6 +9,12 @@ const HeroSection = () => {
     setIsClient(true);
   }, []);
 
+  const handleEmailClick = (role) => {
+    const subject = `Looking for a ${role}`;
+    const email = 'terenceouma@gmail.com';
+    window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+  };
+
   return (
     <section
       id="hero"
@@ -57,10 +63,16 @@ const HeroSection = () => {
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center px-4 pb-8 mt-4 z-20">
-          <button className="w-full sm:w-auto px-6 py-3 bg-black text-white rounded-none">
+          <button 
+            onClick={() => handleEmailClick('Software Engineer')}
+            className="w-full sm:w-auto px-6 py-3 bg-black text-white rounded-none hover:bg-gray-800 transition-colors"
+          >
             You need a software engineer
           </button>
-          <button className="w-full sm:w-auto px-6 py-3 border border-black text-black rounded-none">
+          <button 
+            onClick={() => handleEmailClick('Product Manager')}
+            className="w-full sm:w-auto px-6 py-3 border border-black text-black rounded-none hover:bg-gray-100 transition-colors"
+          >
             You need a product manager
           </button>
         </div>
