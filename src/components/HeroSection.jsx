@@ -23,7 +23,7 @@ const HeroSection = () => {
             <div className="flex flex-col items-center">
               <h2 className="text-[40px] sm:text-[60px] md:text-[50px] lg:text-[80px] text-black">I am</h2>
               <div className="text-[40px] sm:text-[80px] md:text-[60px] lg:text-[120px] font-bold text-black min-h-[1.2em]">
-                {isClient && (
+                {isClient ? (
                   <ReactTyped
                     strings={["Software Engineer", "Product Manager"]}
                     typeSpeed={40}
@@ -31,6 +31,8 @@ const HeroSection = () => {
                     loop
                     className="inline-block"
                   />
+                ) : (
+                  <span>Software Engineer</span>
                 )}
               </div>
             </div>
