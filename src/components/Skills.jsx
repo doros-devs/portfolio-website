@@ -1,4 +1,6 @@
-// Import all the logos - you'll need to add these to your project
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import PropTypes from 'prop-types';
+// Import all the logos
 import jsLogo from "../images/javascript-logo.png";
 import reactLogo from "../images/react-logo.png";
 import dockerLogo from "../images/docker-logo.png";
@@ -14,9 +16,89 @@ import bootstrapLogo from "../images/bootstrap-logo.png";
 import vercelLogo from "../images/vercel-logo.png";
 import nextjsLogo from "../images/nextjs-logo.png";
 
+const SkillCard = ({ logo, alt }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, {
+    stiffness: 150,
+    damping: 15,
+    mass: 0.1
+  });
+
+  const mouseYSpring = useSpring(y, {
+    stiffness: 150,
+    damping: 15,
+    mass: 0.1
+  });
+
+  const rotateX = useTransform(
+    mouseYSpring,
+    [-0.5, 0.5],
+    ["25deg", "-25deg"]
+  );
+
+  const rotateY = useTransform(
+    mouseXSpring,
+    [-0.5, 0.5],
+    ["-25deg", "25deg"]
+  );
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <div className="relative perspective">
+      <motion.div
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        className="w-full relative preserve-3d"
+      >
+        <div className="aspect-square bg-white rounded-2xl p-3 md:p-4 lg:p-6 flex items-center justify-center preserve-3d">
+          <motion.div
+            style={{
+              transform: "translateZ(50px)",
+            }}
+            className="w-full h-full preserve-3d flex items-center justify-center"
+          >
+            <img
+              src={logo}
+              alt={alt}
+              className="h-16 w-16 object-contain backface-hidden"
+            />
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+SkillCard.propTypes = {
+  logo: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
 const Skills = () => {
   const handleDownloadCV = () => {
-    // Add your CV file to the public folder and update the path
     const link = document.createElement("a");
     link.href = "/your-cv.pdf";
     link.download = "Terence-CV.pdf";
@@ -118,54 +200,18 @@ const Skills = () => {
           </div>
         </div>
 
-        <div className="rounded-2xl border-[1px] border-black mt-8 lg:mt-12 ">
+        <div className="rounded-2xl border-[1px] border-black mt-8 lg:mt-12">
           <h3 className="text-center text-[24px] sm:text-[30px] md:text-[40px] text-[#E2FF7D] mt-6 md:mt-8 lg:mt-12">
             ADDITIONAL SKILLS
           </h3>
           <div className="flex justify-center items-center p-4">
             <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              <div className="aspect-square bg-white rounded-2xl p-3 md:p-4 lg:p-6 flex items-center justify-center">
-                <img
-                  src={typescriptLogo}
-                  alt="TypeScript"
-                  className="h-16 w-16 object-contain"
-                />
-              </div>
-              <div className="aspect-square bg-white rounded-2xl p-3 md:p-4 lg:p-6 flex items-center justify-center">
-                <img
-                  src={mysqlLogo}
-                  alt="MySQL"
-                  className="h-16 w-16 object-contain"
-                />
-              </div>
-              <div className="aspect-square bg-white rounded-2xl p-3 md:p-4 lg:p-6 flex items-center justify-center">
-                <img
-                  src={sqliteLogo}
-                  alt="SQLite"
-                  className="h-16 w-16 object-contain"
-                />
-              </div>
-              <div className="aspect-square bg-white rounded-2xl p-3 md:p-4 lg:p-6 flex items-center justify-center">
-                <img
-                  src={bootstrapLogo}
-                  alt="Bootstrap"
-                  className="h-16 w-16 object-contain"
-                />
-              </div>
-              <div className="aspect-square bg-white rounded-2xl p-3 md:p-4 lg:p-6 flex items-center justify-center">
-                <img
-                  src={vercelLogo}
-                  alt="Vercel"
-                  className="h-16 w-16 object-contain"
-                />
-              </div>
-              <div className="aspect-square bg-white rounded-2xl p-3 md:p-4 lg:p-6 flex items-center justify-center">
-                <img
-                  src={nextjsLogo}
-                  alt="Next.js"
-                  className="h-16 w-16 object-contain"
-                />
-              </div>
+              <SkillCard logo={typescriptLogo} alt="TypeScript" />
+              <SkillCard logo={mysqlLogo} alt="MySQL" />
+              <SkillCard logo={sqliteLogo} alt="SQLite" />
+              <SkillCard logo={bootstrapLogo} alt="Bootstrap" />
+              <SkillCard logo={vercelLogo} alt="Vercel" />
+              <SkillCard logo={nextjsLogo} alt="Next.js" />
             </div>
           </div>
         </div>
